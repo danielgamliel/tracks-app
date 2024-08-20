@@ -8,7 +8,7 @@ import SignupScreen from "./src/screens/SignupScreen";
 import AccountScreen from "./src/screens/AccountScreen";
 import TrackCreateScreen from "./src/screens/TrackCreateScreen";
 import TrackListScreen from "./src/screens/TrackListScreen";
-import TrackDetailsScreen from './src/screens/TrackDetailsScreen';
+import TrackDetailScreen from './src/screens/TrackDetailScreen';
 import { Provider as AuthProvider, Context as AuthContext } from './src/context/AuthContext';
 import { Provider as LocationProvider } from './src/context/LocationContext';
 

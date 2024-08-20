@@ -51,9 +51,7 @@ const signin = dispatch => async ({ email, password }, navigation) => {
     // Save the token securely using SecureStore
     await SecureStore.setItemAsync("token", response.data.token);
     dispatch({ type: "signin", payload: response.data.token });
-    navigation.dispatch(
-      CommonActions.replace('MainFlow')
-    );
+    navigation.dispatch(CommonActions.replace('MainFlow'));
   } catch (err) {
     dispatch({
       type: "add_error",

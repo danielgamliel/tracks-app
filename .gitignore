@@ -41,6 +41,7 @@ yarn-error.*
 
 # local env files
 .env*.local
+mongoCredentials.js
 
 # typescript
 *.tsbuildinfo

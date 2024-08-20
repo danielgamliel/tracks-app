@@ -15,7 +15,8 @@ import requireAuth from './middleware/requireAuth.js';
 // Create an instance of Express
 const server = express();
 
-server.use(bodyParser.json()); // Use body-parser middleware to parse JSON requests
+// server.use(bodyParser.json()); // Use body-parser middleware to parse JSON requests
+server.use(express.json()); // Use express's built-in middleware to parse JSON requests
 
 server.use(authRoutes); // Use the authentication routes - creating a user
 server.use(trackRoutes); // Use the track routes - after auth routes
