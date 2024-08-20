@@ -1,5 +1,7 @@
 import * as Location from 'expo-location';
 
+console.log("Mock location script loaded");
+
 const tenMetersWithDegrees = 0.0001;
 
 const getLocation = increment => {
@@ -24,4 +26,5 @@ setInterval(() => {
     location: getLocation(counter)
   });
   counter++;
+  console.log("Mock location emitted:", counter);
 }, 10000);

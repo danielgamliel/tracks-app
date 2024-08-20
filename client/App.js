@@ -11,6 +11,7 @@ import TrackListScreen from "./src/screens/TrackListScreen";
 import TrackDetailScreen from './src/screens/TrackDetailScreen';
 import { Provider as AuthProvider, Context as AuthContext } from './src/context/AuthContext';
 import { Provider as LocationProvider } from './src/context/LocationContext';
+import { Provider as TrackProvider } from './src/context/TrackContext';
 
 
 const Stack = createNativeStackNavigator();
@@ -20,7 +21,7 @@ function TrackListFlow() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="TrackList" component={TrackListScreen} />
-      <Stack.Screen name="TrackDetails" component={TrackDetailsScreen} />
+      <Stack.Screen name="TrackDetails" component={TrackDetailScreen} />
     </Stack.Navigator>
   );
 }
@@ -69,16 +70,19 @@ const App = () => {
         )}
       </Stack.Navigator>
     </NavigationContainer>
+   
   );
 }
 
 //Making sure AuthProvider available for all components
 export default () => {
   return (
+    <TrackProvider>
     <LocationProvider>
     <AuthProvider>
       <App />
     </AuthProvider>
     </LocationProvider>
+     </TrackProvider>
   );
 };
