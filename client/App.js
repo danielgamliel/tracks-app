@@ -21,7 +21,7 @@ function TrackListFlow() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="TrackList" component={TrackListScreen} />
-      <Stack.Screen name="TrackDetails" component={TrackDetailScreen} />
+      <Stack.Screen name="TrackDetail" component={TrackDetailScreen} />
     </Stack.Navigator>
   );
 }
