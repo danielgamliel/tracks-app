@@ -23,7 +23,7 @@ const tryLocalSignin = dispatch => async () => {
   const token = await SecureStore.getItemAsync('token');
   if (token) {
     dispatch({ type: 'signin', payload: token });
-    console.log("token exsist");
+    console.log(token);
   } else{
     console.log("no token");
 

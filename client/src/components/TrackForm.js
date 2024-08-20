@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { Input, Button } from 'react-native-elements';
 import { Context as LocationContext } from '../context/LocationContext';
-import { View, Alert } from 'react-native';
+import { View, Alert, SafeAreaView } from 'react-native';
 import useSaveTrack from '../hooks/useSaveTrack';
 
-
-const TrackForm = () => {
-  const {state: { name, recording },startRecording,stopRecording,changeName} = useContext(LocationContext);
+const TrackForm = ({ navigation }) => {
+  const { state: { name, recording, locations },
+    startRecording, stopRecording, changeName } = useContext(LocationContext);
   const [saveTrack] = useSaveTrack();
 
   const handleStartRecording = () => {
@@ -17,8 +17,12 @@ const TrackForm = () => {
     startRecording();
   };
 
+  const handleSaveTrack = () => {
+    saveTrack(navigation);
+  };
+
   return (
-    <>
+    <SafeAreaView>
       <Input
         value={name}
         onChangeText={changeName}
@@ -30,9 +34,9 @@ const TrackForm = () => {
         <Button title="Start Recording" onPress={handleStartRecording} buttonStyle={{ backgroundColor: 'green' }} />
       )}
       {!recording && locations.length ? (
-          <Button title="Save Recording" onPress={saveTrack} />
-        ) : null}
-    </>
+        <Button title="Save Recording" onPress={handleSaveTrack} />
+      ) : null}
+    </SafeAreaView>
   );
 };
 

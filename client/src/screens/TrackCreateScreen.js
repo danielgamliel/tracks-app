@@ -3,6 +3,7 @@
  * Manages location tracking and integrates with the location context.
  * Tracking starts when screen is in focus and stops when out of focus.
  */
+import '../_mockLocation';
 import { useFocusEffect } from '@react-navigation/native';
 import React, { useContext, useCallback } from 'react';
 import { StyleSheet, SafeAreaView, Text } from 'react-native';
@@ -11,15 +12,21 @@ import { Context as LocationContext } from '../context/LocationContext';
 import useLocation from '../hooks/useLocation';
 import TrackForm from '../components/TrackForm';
 
-const TrackCreateScreen = () => {
+const TrackCreateScreen = ({ navigation }) => {
   const { state, addLocation, stopRecording } = useContext(LocationContext);
-                            //shouldTrack  , callback
-  const [err] = useLocation(state.recording, location => {addLocation(location, state.recording)});
+  const [err] = useLocation(state.recording, location => {
+    console.log('Adding location:', location);
+    addLocation(location, state.recording);
+  });
 
-  // Stop recording when the screen loses focus
   useFocusEffect(
     useCallback(() => {
-      return () =>  if (state.recording) stopRecording()
+      console.log("TrackCreateScreen gained focus");
+      if (state.recording) {
+        return () => {
+          stopRecording();
+        };
+      }
     }, [state.recording])
   );
 
@@ -28,7 +35,7 @@ const TrackCreateScreen = () => {
       <Text h2>Create a Track</Text>
       <Map />
       {err ? <Text>Please enable location services</Text> : null}
-      <TrackForm />
+      <TrackForm navigation={navigation} />
     </SafeAreaView>
   );
 };
