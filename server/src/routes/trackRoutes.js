@@ -31,4 +31,22 @@ router.post('/tracks', requireAuth, async (req, res) => { // Fix order of parame
   }
 });
 
+
+router.delete('/tracks/:id', async (req, res) => {
+  try {
+    const { id } = req.params; 
+    const track = await Track.findOneAndDelete({ _id: id, userId: req.user._id });
+
+    if (!track) {
+      console.log('Track not found or you do not have permission to delete it');
+      return res.status(404).send({ error: 'Track not found or you do not have permission to delete it' });
+    }
+
+    res.send({ message: 'Track deleted successfully' });
+    console.log('Track deleted successfully');
+  } catch (err) {
+    res.status(422).send({ error: err.message });
+  }
+});
+
 export default router;

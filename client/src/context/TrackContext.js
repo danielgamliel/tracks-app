@@ -5,8 +5,19 @@ const trackReducer = (state, action) => {
   switch (action.type) {
     case 'fetch_tracks':
       return action.payload;
+      case 'delete_track':
+        return state.filter(track => track._id !== action.payload);
     default:
       return state;
+  }
+};
+
+const deleteTrack = dispatch => async (id) => {
+  try {
+    await trackerApi.delete(`/tracks/${id}`);
+    dispatch({ type: 'delete_track', payload: id });
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -20,6 +31,6 @@ const createTrack = dispatch => async (name, locations) => {
 
 export const { Provider, Context } = createDataContext(
   trackReducer,
-  { fetchTracks, createTrack },
+  { fetchTracks, createTrack, deleteTrack },
   []
 );

@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { View, Text } from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -29,9 +30,36 @@ function TrackListFlow() {
 function MainFlow() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="TrackListFlow" component={TrackListFlow} />
-      <Tab.Screen name="TrackCreate" component={TrackCreateScreen} />
-      <Tab.Screen name="Account" component={AccountScreen} />
+        <Tab.Screen 
+        name="TrackListFlow" 
+        component={TrackListFlow} 
+        options={{
+          tabBarLabel: 'Tracks',
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="list" color={color} size={24} />
+          ),
+        }}
+      />
+      <Tab.Screen 
+        name="TrackCreate" 
+        component={TrackCreateScreen} 
+        options={{
+          tabBarLabel: 'Create Track',
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="plus" color={color} size={24} />
+          ),
+        }}
+      />
+      <Tab.Screen 
+        name="Account" 
+        component={AccountScreen} 
+        options={{
+          tabBarLabel: 'Account',
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="user" color={color} size={24} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
@@ -74,7 +102,7 @@ const App = () => {
   );
 }
 
-//Making sure AuthProvider available for all components
+
 export default () => {
   return (
     <TrackProvider>

@@ -3,7 +3,7 @@ import * as SecureStore from 'expo-secure-store';
 
 // Create an Axios instance with a base URL for the API
 const instance = axios.create({
-  baseURL: "https://ccb1-94-188-253-157.ngrok-free.app/",
+  baseURL: "https://9dcc-2a00-a041-e08e-9000-6184-21cb-e0ea-5704.ngrok-free.app/",
 });
 
 // Add a request interceptor to the Axios instance

@@ -1,43 +1,73 @@
-// Example for adding error handling in SignUpScreen
-import React, {useState,  useContext, useEffect } from 'react';
-import { View,Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Input, Button } from 'react-native-elements';
+// TODO: same component as signin
+
+import React, { useState, useContext, useEffect } from 'react';
+import { TextInput, View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import { Context as AuthContext } from '../context/AuthContext';
 
 const SignUpScreen = ({ navigation }) => {
   const { state, signup, clearErrorMessage } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [localErrorMessage, setLocalErrorMessage] = useState('');
 
-  // Clear error message when the component is first rendered
   useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {clearErrorMessage() });
+    const unsubscribe = navigation.addListener('focus', () => {
+      clearErrorMessage();
+      setLocalErrorMessage(''); // Clear local error when screen is focused
+    });
     return unsubscribe;
   }, []);
 
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleSignUp = () => {
+    if (!isValidEmail(email)) {
+      setLocalErrorMessage("Please enter a valid email address.\nvalid format : example@domain.com.");
+      return;
+    }
+    signup({ email, password }, navigation);
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 51}}>Sign Up</Text>
-      <Input 
+      <Text style={styles.title}>Sign Up</Text>
+      <TextInput 
         label="Email" 
-        value={email} 
+        value={email}
+        placeholder="Email" 
         onChangeText={setEmail} 
+        style={styles.input}
         autoCorrect={false}
         autoCapitalize="none" 
+        placeholderTextColor="#999"
       />
-      <Input 
+      <TextInput 
         label="Password" 
         value={password} 
-        onChangeText={setPassword} 
+        placeholder="Password"
+        onChangeText={setPassword}
+        style={styles.input} 
         secureTextEntry 
         autoCorrect={false}
         autoCapitalize="none" 
+        placeholderTextColor="#999"
       />
-      {state.errorMessage ? <Text style={styles.errorMessage}>{state.errorMessage}</Text> : null}
-      <Button title="Sign Up"  onPress={() => signup({ email, password }, navigation)} />
-      <TouchableOpacity onPress={() =>  navigation.navigate("Signin")}>
-        <Text h5>Already have an account?</Text>
-        </TouchableOpacity>
+      {(state.errorMessage || localErrorMessage) ? (
+        <Text style={styles.errorMessage}>
+          {state.errorMessage || localErrorMessage}
+        </Text>
+      ) : null}
+      <Button 
+        title="Sign Up"  
+        onPress={handleSignUp} 
+        buttonStyle={styles.button}
+      />
+      <TouchableOpacity onPress={() => navigation.navigate("Signin")}>
+        <Text style={styles.link}>Already have an account? Sign in</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -45,15 +75,42 @@ const SignUpScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems:'center',
+    alignItems: 'center',
     justifyContent: 'center',
-    margin: 15,
-    marginBottom: 100
+    padding: 20,
+    backgroundColor: '#f8f8f8'
+  },
+  title: {
+    fontSize: 48,
+    marginBottom: 30,
+    color: '#333',
+  },
+  input: {
+    width: '100%',
+    height: 50,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    marginBottom: 25,
+    paddingHorizontal: 10,
+    fontSize: 18,
+    color: '#333',
   },
   errorMessage: {
     fontSize: 16,
     color: 'red',
     marginVertical: 15,
+  },
+  button: {
+    backgroundColor: '#1E90FF',
+    borderRadius: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginBottom: 15,
+  },
+  link: {
+    fontSize: 16,
+    color: '#007BFF',
+    marginTop: 15,
   },
 });
 
