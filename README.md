@@ -46,6 +46,8 @@ POST /tracks: Save a new track.
 
 DELETE /tracks/: Delete a specific track.
 
+## Screens.
+
 ![photo_2024-08-21_15-57-52](https://github.com/user-attachments/assets/b84b27d6-7cc4-40dd-8106-d8c06734f36d)
 
 
