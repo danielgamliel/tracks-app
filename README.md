@@ -34,7 +34,7 @@ Tracks is a mobile application built with React Native for tracking user locatio
 
 ![image](https://github.com/user-attachments/assets/7cab01ff-d841-4693-ab57-48661cbc1a54)
 
-API Endpoints.
+##API Endpoints.
 
 POST /signup: Register a new user.
 
