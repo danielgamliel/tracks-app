@@ -41,8 +41,6 @@ GET /tracks: Retrieve all tracks for a user.
 POST /tracks: Save a new track.
 DELETE /tracks/: Delete a specific track.
 
-![create](https://github.com/user-attachments/assets/7e8121eb-491d-401b-a995-715a80d21659)
-![sign](https://github.com/user-attachments/assets/b00ac834-a037-41bd-8b04-fbaf0af95d01)
-![list](https://github.com/user-attachments/assets/bde3fcf4-4727-4d7a-934b-ba9b93e1571b)
-![acount](https://github.com/user-attachments/assets/7f91a67e-4e43-450f-94ee-503c13e79a1b)
+![photo_2024-08-21_15-57-52](https://github.com/user-attachments/assets/b84b27d6-7cc4-40dd-8106-d8c06734f36d)
+
 
