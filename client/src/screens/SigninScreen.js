@@ -1,6 +1,7 @@
-import React, { useState, useContext,useEffect } from 'react';
-import { View,Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Input, Button } from 'react-native-elements';
+/* should be same component as sign up*/
+
+import React, {useState,  useContext, useEffect } from 'react';
+import { TextInput, View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import { Context as AuthContext } from '../context/AuthContext';
 
 const SigninScreen = ({ navigation }) => {
@@ -15,26 +16,36 @@ const SigninScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 51}}>Sign In</Text>
-      <Input 
+      <Text style={styles.title}>Sign in</Text>
+      <TextInput 
         label="Email" 
-        value={email} 
-        onChangeText={setEmail}
+        value={email}
+        placeholder="Email" 
+        onChangeText={setEmail} 
+        style={styles.input}
         autoCorrect={false}
-        autoCapitalize="none"  
+        autoCapitalize="none" 
+        placeholderTextColor="#999"
       />
-      <Input 
+      <TextInput 
         label="Password" 
         value={password} 
-        onChangeText={setPassword} 
+        placeholder="Password"
+        onChangeText={setPassword}
+        style={styles.input} 
         secureTextEntry 
         autoCorrect={false}
         autoCapitalize="none" 
+        placeholderTextColor="#999"
       />
       {state.errorMessage ? <Text style={styles.errorMessage}>{state.errorMessage}</Text> : null}
-      <Button title="Sign In" onPress={() => signin({ email, password }, navigation)} />
-      <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-        <Text h5>Don't have an account? Sign up instead</Text>
+      <Button 
+        title="Sign In"  
+        onPress={() => signin({ email, password }, navigation)} 
+        buttonStyle={styles.button}
+      />
+      <TouchableOpacity onPress={() =>  navigation.navigate("Signup")}>
+        <Text style={styles.link}>Don't have an account? Sign up instead</Text>
       </TouchableOpacity>
     </View>
   );
@@ -45,13 +56,40 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 15,
-    marginBottom: 100
+    padding: 20,
+    backgroundColor: '#f8f8f8'
+  },
+  title: {
+    fontSize: 48,
+    marginBottom: 30,
+    color: '#333',
+  },
+  input: {
+    width: '100%',
+    height: 50,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    marginBottom: 25,
+    paddingHorizontal: 10,
+    fontSize: 18,
+    color: '#333',
   },
   errorMessage: {
     fontSize: 16,
     color: 'red',
     marginVertical: 15,
+  },
+  button: {
+    backgroundColor: '#1E90FF',
+    borderRadius: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginBottom: 15,
+  },
+  link: {
+    fontSize: 16,
+    color: '#007BFF',
+    marginTop: 15,
   },
 });
 

@@ -3,11 +3,20 @@ import { View, StyleSheet, Text } from 'react-native';
 import { Context as TrackContext } from '../context/TrackContext';
 import MapView, { Polyline } from 'react-native-maps';
 
-const TrackDetailScreen = ({ navigation }) => {
+const TrackDetailScreen = ({ route }) => {
   const { state } = useContext(TrackContext);
-  const _id = navigation.getParam('_id');
+  const { _id } = route.params;
 
   const track = state.find(t => t._id === _id);
+
+  if (!track) {
+    return (
+      <View style={styles.centered}>
+        <Text style={{ fontSize: 24 }}>Track not found</Text>
+      </View>
+    );
+  }
+
   const initialCoords = track.locations[0].coords;
 
   return (
@@ -30,6 +39,11 @@ const TrackDetailScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   map: {
     height: 300
+  },
+  centered: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 

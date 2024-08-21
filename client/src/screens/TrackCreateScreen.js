@@ -3,7 +3,7 @@
  * Manages location tracking and integrates with the location context.
  * Tracking starts when screen is in focus and stops when out of focus.
  */
-import '../_mockLocation';
+// import '../_mockLocation';
 import { useFocusEffect } from '@react-navigation/native';
 import React, { useContext, useCallback } from 'react';
 import { StyleSheet, SafeAreaView, Text } from 'react-native';

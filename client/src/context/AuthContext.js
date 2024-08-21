@@ -36,7 +36,10 @@ const signup = dispatch => async ({ email, password }, navigation) => {
     const response = await trackerApi.post("/signup", { email, password });
     // Save the token securely using SecureStore
     await SecureStore.setItemAsync("token", response.data.token);
-    dispatch({ type: "signup", payload: response.data.token });
+    await SecureStore.setItemAsync("email", email);
+    dispatch({ type: "signup", payload: response.data.token, email });
+     await SecureStore.setItemAsync("email", email);
+    console.log("email: ", email);
     console.log(response.data.token);
     navigation.dispatch(
       CommonActions.replace('MainFlow')
@@ -50,7 +53,9 @@ const signin = dispatch => async ({ email, password }, navigation) => {
     const response = await trackerApi.post("/signin", { email, password });
     // Save the token securely using SecureStore
     await SecureStore.setItemAsync("token", response.data.token);
-    dispatch({ type: "signin", payload: response.data.token });
+    await SecureStore.setItemAsync("email", email);
+    dispatch({ type: "signin", payload: response.data.token, email });
+    console.log("email: ", email);
     navigation.dispatch(CommonActions.replace('MainFlow'));
   } catch (err) {
     dispatch({
