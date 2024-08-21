@@ -35,10 +35,15 @@ Tracks is a mobile application built with React Native for tracking user locatio
 ![image](https://github.com/user-attachments/assets/7cab01ff-d841-4693-ab57-48661cbc1a54)
 
 API Endpoints.
+
 POST /signup: Register a new user.
+
 POST /signin: Sign in a user.
+
 GET /tracks: Retrieve all tracks for a user.
+
 POST /tracks: Save a new track.
+
 DELETE /tracks/: Delete a specific track.
 
 ![photo_2024-08-21_15-57-52](https://github.com/user-attachments/assets/b84b27d6-7cc4-40dd-8106-d8c06734f36d)
